@@ -1,0 +1,33 @@
+<launch>
+
+  <arg name="dmp_name" default="dmp.xml" />
+  <arg name="trajectory_name" default="traj.txt" />
+
+  <!-- DMPBBO parameters -->
+  <arg name="dmp_type" default="0"
+    doc="Integer, for IJSPEERT_2002_MOVEMENT, KULVICIUS_2012_JOINING, COUNTDOWN_2013"/>
+  <arg name="scaling_type" default="0"
+    doc="Integer, for NO_SCALING, G_MINUS_Y0_SCALING, AMPLITUDE_SCALING" />
+  <arg name="basis_count" default="30"
+    doc="Number of basis functions to form the forcing term" />
+  <arg name="intersection" default="0.56"
+    doc="Ratio of intersection between basis functions"/>
+  <arg name="save_details" default="true"
+    doc="Write info for analyzing?" />
+
+  <node name="train_dmp"
+        type="train_dmp"
+        pkg="dmp_tools"
+        output="screen">
+
+    <!-- no initial dmp -->
+    <param name="dmp_name" value="$(arg dmp_name)" />
+    <param name="trajectory_name" value="$(arg trajectory_name)" />
+    <param name="dmp_type" value="$(arg dmp_type)" />
+    <param name="scaling_type" value="$(arg scaling_type)" />
+    <param name="basis_count" value="$(arg basis_count)" />
+    <param name="intersection" value="$(arg intersection)" />
+    <param name="save_details" value="$(arg save_details)" />
+  </node>
+
+</launch>
